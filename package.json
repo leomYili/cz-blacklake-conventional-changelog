@@ -1,6 +1,6 @@
 {
-  "name": "cz-blacklake-conventional-changelog",
-  "version": "1.0.0",
+  "name": "yx-blacklake-conventional-changelog",
+  "version": "0.2.0",
   "description": "Commitizen adapter following the conventional-changelog format.",
   "main": "index.js",
   "scripts": {
@@ -9,16 +9,16 @@
     "format": "prettier --write *.js",
     "semantic-release": "semantic-release"
   },
-  "homepage": "https://github.com/AshOneA/cz-blacklake-conventional-changelog",
+  "homepage": "https://github.com/leomYili/cz-blacklake-conventional-changelog",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AshOneA/cz-blacklake-conventional-changelog.git"
+    "url": "https://github.com/leomYili/cz-blacklake-conventional-changelog.git"
   },
   "engineStrict": true,
   "engines": {
     "node": ">= 10"
   },
-  "author": "Jim Cummins <jimthedev@gmail.com>",
+  "author": "leomYili <leomy@outlook.com>",
   "license": "MIT",
   "dependencies": {
     "chalk": "^2.4.1",
