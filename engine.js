@@ -161,7 +161,7 @@ module.exports = function (options) {
         {
           type: 'input',
           name: 'issues',
-          message: '增加jira版本号关联,可多个 (例. "fix #1234, fix #2345"):\n',
+          message: '增加云效任务号关联,可多个 (例. "#1234,#2345"):\n',
           default: options.defaultIssues ? options.defaultIssues : undefined
         }
       ]).then(function (answers) {
