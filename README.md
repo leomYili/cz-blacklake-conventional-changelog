@@ -25,7 +25,8 @@ Like commitizen, you specify the configuration of cz-conventional-changelog thro
             "defaultScope": "",        
             "defaultSubject": "",
             "defaultBody": "",
-            "defaultIssues": ""
+            "defaultIssues": "",
+            "defaultTaskIds": ""
         }
     }
 // ...    
@@ -41,6 +42,8 @@ The following environment varibles can be used to override any default configura
 * CZ_BODY = defaultBody
 * CZ_MAX_HEADER_WIDTH = maxHeaderWidth
 * CZ_MAX_LINE_WIDTH = maxLineWidth
+* CZ_TASKIDS = defaultTaskIds
+* CZ_ISSUES = defaultIssues
 
 ### Commitlint
 

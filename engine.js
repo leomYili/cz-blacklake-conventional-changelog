@@ -44,7 +44,7 @@ module.exports = function (options) {
   var choices = map(types, function (type, key) {
     return {
       name: rightPad(key + ':', length) + ' ' + type.description,
-      value: key
+      value: key,
     };
   });
 
@@ -72,9 +72,9 @@ module.exports = function (options) {
         {
           type: 'list',
           name: 'type',
-          message: "选择你这次要提交的type:",
+          message: '选择你这次要提交的type:',
           choices: choices,
-          default: options.defaultType
+          default: options.defaultType,
         },
         {
           type: 'input',
@@ -84,7 +84,7 @@ module.exports = function (options) {
           default: options.defaultScope,
           filter: function (value) {
             return value.trim().toLowerCase();
-          }
+          },
         },
         {
           type: 'input',
@@ -102,8 +102,8 @@ module.exports = function (options) {
             return filteredSubject.length == 0
               ? 'subject is required'
               : filteredSubject.length <= maxSummaryLength(options, answers)
-                ? true
-                : 'Subject length must be less than or equal to ' +
+              ? true
+              : 'Subject length must be less than or equal to ' +
                 maxSummaryLength(options, answers) +
                 ' characters. Current length is ' +
                 filteredSubject.length +
@@ -119,20 +119,26 @@ module.exports = function (options) {
           },
           filter: function (subject) {
             return filterSubject(subject);
-          }
+          },
         },
         {
           type: 'input',
           name: 'body',
           message:
             '详细描述:Provide a longer description of the change: (press enter to skip)\n',
-          default: options.defaultBody
+          default: options.defaultBody,
+        },
+        {
+          type: 'input',
+          name: 'taskIds',
+          message: '增加云效任务号关联,可多个 (例. "#1234,#2345"),格式为 fix #ID时会修改状态为已解决:\n',
+          default: options.defaultTaskIds ? options.defaultTaskIds : undefined,
         },
         {
           type: 'confirm',
           name: 'isBreaking',
           message: 'Are there any breaking changes(不兼容变动)?',
-          default: false
+          default: false,
         },
         {
           type: 'input',
@@ -148,7 +154,7 @@ module.exports = function (options) {
               breakingBody.trim().length > 0 ||
               'Body is required for BREAKING CHANGE'
             );
-          }
+          },
         },
         {
           type: 'input',
@@ -156,21 +162,15 @@ module.exports = function (options) {
           message: 'Describe the breaking changes:\n',
           when: function (answers) {
             return answers.isBreaking;
-          }
+          },
         },
-        {
-          type: 'input',
-          name: 'issues',
-          message: '增加云效任务号关联,可多个 (例. "#1234,#2345"):\n',
-          default: options.defaultIssues ? options.defaultIssues : undefined
-        }
       ]).then(function (answers) {
         var wrapOptions = {
           trim: true,
           cut: false,
           newline: '\n',
           indent: '',
-          width: options.maxLineWidth
+          width: options.maxLineWidth,
         };
 
         // parentheses are only needed when a scope is present
@@ -189,10 +189,10 @@ module.exports = function (options) {
           : '';
         breaking = breaking ? wrap(breaking, wrapOptions) : false;
         // var jiraMessage = answers.jira && `[GC-${answers.jira}](http://jira.blacklake.tech/GC-${answers.jira})`
-        var issues = answers.issues ? wrap(answers.issues, wrapOptions) : false;
+        var taskIds = answers.taskIds ? wrap(answers.taskIds, wrapOptions) : false;
 
-        commit(filter([head, body, breaking, issues]).join('\n\n'));
+        commit(filter([head, body, breaking, taskIds]).join('\n\n'));
       });
-    }
+    },
   };
 };
